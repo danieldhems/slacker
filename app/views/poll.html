@@ -1,0 +1,12 @@
+<div class="hero-unit">
+	<h1>Poll</h1>
+
+	<h2>{{poll.question}}</h2>
+
+	<ul>
+		<li ng-repeat="choice in poll.choices">
+			{{choice.text}}  {{choice.votes}}
+			<button ng-click="vote($index)">Choose</button>
+		</li>
+	</ul>
+</div>

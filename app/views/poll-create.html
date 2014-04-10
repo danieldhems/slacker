@@ -1,0 +1,21 @@
+<div class="hero-unit">
+	<h1>Create a new poll</h1>
+
+	<input type="text" ng-model="poll.question" placeholder="Question...">
+	<ul>
+		<li ng-repeat="choice in poll.choices">
+			{{choice.text}}
+			<button ng-click="removeChoice($index)">Remove</button>
+		</li>
+	</ul>
+
+	<p>Add choice:</p>
+	<ul>
+		<li>
+			<input type="text" ng-model="newChoice" placeholder="New choice...">
+			<button ng-click="addChoice(newChoice)">add</button>
+		</li>
+	</ul>
+
+	<button ng-click="savePoll()">Finish</button>
+</div>
