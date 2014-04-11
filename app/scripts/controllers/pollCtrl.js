@@ -37,7 +37,7 @@ angular.module('sitesApp')
 
 			var vote = {
 				poll: $scope.poll._id,
-				choice: $scope.poll.choices[choice]._id
+				choice: $scope.poll.choices[choice].text
 			};
 
 			$http.put('/polls/vote', vote)

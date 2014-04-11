@@ -52,15 +52,9 @@ app.put('/polls/vote', function(req, res){
 	console.log(req.body);
 
 	var pollID = req.body.poll,
-			choiceID = req.body.choice;
-/*/
-	Poll.findOne({ _id: pollID, choices: {_id: choiceID } }, function(err, data){
-		if(err) console.log(new Error(err));
-		console.log(data);
-		res.send("Done");
-	})
-	/
-	Poll.findOneAndUpdate({ _id: pollID }, { $inc: { 'choices['+choiceID+']': { votes: 1 } } }, function(err, data){
+			choiceText = req.body.choice;
+
+	Poll.findOneAndUpdate({ poll: pollID, 'choices.text': choiceText}, { $inc: { 'choices.$.votes': 1 } }, function(err, data){
 		if(err) console.log(new Error(err));
 		console.log(data);
 		res.send("Done");
