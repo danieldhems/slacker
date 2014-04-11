@@ -3,17 +3,27 @@
 
 	<h2>{{poll.question}}</h2>
 
-	<ul>
-		<li ng-repeat="choice in poll.choices">
-			<span>{{choice.text}}</span>
-			<!-- Show vote button if user hasn't voted -->
-			<button ng-click="vote($index)" ng-show="!voted">Vote</button>
-			<!-- Show result count after user has voted -->
-			<div class="count-bar" ng-show="voted">
-				<span style="width:{{choice.votes*20}}px">&nbsp;</span>{{choice.votes}}
-			</div>
-		</li>
-	</ul>
+	<div class="vote-place" ng-show="canVote()">
+		<ul>
+			<li ng-repeat="choice in poll.choices">
+				<span>{{choice.text}}</span>
+				<!-- Show vote button if user hasn't voted -->
+				<button ng-click="vote($index)">Vote</button>
+			</li>
+		</ul>
+	</div>
+
+	<div class="vote-results" ng-show="!canVote()">
+		<ul>
+			<li ng-repeat="choice in poll.choices">
+				<span>{{choice.text}}</span>
+				<!-- Show result count after user has voted -->
+				<div class="count-bar">
+					<span style="width:{{choice.votes*20}}px">&nbsp;</span>{{choice.votes}}
+				</div>
+			</li>
+		</ul>
+	</div>
 
 	<h1>Archive</h1>
 	<ul>

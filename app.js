@@ -15,7 +15,8 @@ var ChoicesSchema = new Schema({
 var	PollSchema = new Schema({
 			question: String,
 			choices: [ChoicesSchema],
-			created: Date
+			created: Date,
+			expires: Date
 		});
 
 var Poll = mongoose.model('Poll', PollSchema);

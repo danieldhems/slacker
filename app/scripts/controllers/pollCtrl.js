@@ -10,8 +10,18 @@ PollApp
 	})
 	.controller('PollCtrl', function ($scope, $http, $routeParams) {
 
+		// Poll currently in play, populated after successful fetch from DB
 		$scope.poll;
+		// Historic polls that can be viewed for results, but no longer acted upon
 		$scope.archive=[];
+		// Flag wheher user has voted yet
+		$scope.hasVoted = false;
+
+		// Check if user can vote
+		$scope.canVote = function(){
+			if($scope.poll === undefined) return;
+			return !$scope.hasVoted && new Date().toISOString() > $scope.poll.expires;
+		}
 
 		/***
   	*
@@ -50,7 +60,6 @@ PollApp
 		$scope.fetchPoll();
 		$scope.fetchPolls();
 
-
 		// Make vote on poll
 		$scope.vote = function(choice){
 
@@ -63,15 +72,11 @@ PollApp
 
 			$http.put('/polls/vote', vote)
 				.success( function(data){
-					// Let user know
-					$scope.voted = true;
+					// Set this to true to toggle vote buttons with results in view
+					$scope.hasVoted = true;
 				})
 				.error( function(err){
 					console.log(err);
 				})
 		}
-
-  	// Get result for poll
-
-
 	});
