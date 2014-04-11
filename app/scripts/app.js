@@ -6,7 +6,7 @@
     PollApp.config(function ($routeProvider) {
         $routeProvider
             // Would want to pass name or ID here, either for title or viewing old polls
-            .when('/poll/:pollID', {
+            .when('/poll/:pollID/:pollQuestion', {
                 templateUrl: 'views/poll.html',
                 controller: 'PollCtrl'
             })
