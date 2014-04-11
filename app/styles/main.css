@@ -25,3 +25,9 @@ ul {
     margin:0;
     padding:0;
 }
+
+.count-bar span {
+    display:inline-block;
+    background-color:#FFD76E;
+    margin-right:.5em;
+}

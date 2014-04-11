@@ -5,8 +5,13 @@
 
 	<ul>
 		<li ng-repeat="choice in poll.choices">
-			{{choice.text}}  {{choice.votes}}
+			<span>{{choice.text}}</span>
+			<!-- Show vote button if user hasn't voted -->
 			<button ng-click="vote($index)" ng-show="!voted">Vote</button>
+			<!-- Show result count after user has voted -->
+			<div class="count-bar" ng-show="voted">
+				<span style="width:{{choice.votes*20}}px">&nbsp;</span>{{choice.votes}}
+			</div>
 		</li>
 	</ul>
 
