@@ -26,28 +26,31 @@ app.directory = __dirname;
 require('./config/environments')(app);
 require('./routes')(app);
 
+app.get('/polls', function(req, res){
 
-
-
-app.get('/polls/:pollName', function(req, res){
-
-	var name = req.params.pollName;
-
-	console.log("fetching: "+name);
-
-	Poll.findOne({question: name})
+	Poll.find()
 		.sort({"created": -1})
 		.exec( function(err, data){
 			if(err) console.log(new Error(err));
 
-			console.log("\nDocuments fetched: "+data);
 			res.send(data);
-		})
+	})
+})
+
+app.get('/poll/:pollID', function(req, res){
+
+	var pollID = new ObjectId(req.params.pollID);
+
+	Poll.findOne({"_id": pollID})
+		.sort({"created": -1})
+		.exec( function(err, data){
+			if(err) console.log(new Error(err));
+
+			res.send(data);
+	})
 })
 
 app.post('/polls/new', function(req, res){
-
-	console.log("\nCreating document: "+req.body.question);
 
 	Poll.create(req.body, function(err){
 		if(err) console.log(new Error(err));
@@ -64,7 +67,6 @@ app.put('/polls/vote', function(req, res){
 		
 		if(err) console.log(new Error(err));
 		
-		console.log("\nDocument updated: "+data);
 		res.send("Done");
 	})
 })

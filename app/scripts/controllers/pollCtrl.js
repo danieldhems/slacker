@@ -3,19 +3,39 @@
 var PollApp = angular.module('PollApp');
 
 PollApp
-	.controller('PollCtrl', function ($scope, $http, $routeParams, StringService) {
+	.controller('PollCtrl', function ($scope, $http, $routeParams) {
+
+		$scope.poll;
+		$scope.archive=[];
 
 		/***
   	*
-  	*	Fetch poll
+  	*	Fetch poll by ID
   	*
   	***/
 
   	$scope.fetchPoll = function(){
 
-			$http.get('/polls/'+$scope.pollName)
-				.success( function(data){
-					$scope.poll = data;
+			$http.get('/poll/'+ $routeParams.pollID)
+				.success( function(poll){
+					$scope.poll = poll;
+				})
+				.error( function(err){
+					console.log(err);
+				})
+		}
+
+		/***
+		*
+		*	Fetch all polls
+		*
+		***/
+
+  	$scope.fetchPolls = function(){
+
+			$http.get('/polls/')
+				.success( function(polls){
+					$scope.archive = polls;
 				})
 				.error( function(err){
 					console.log(err);
@@ -23,6 +43,7 @@ PollApp
 		}
 
 		$scope.fetchPoll();
+		$scope.fetchPolls();
 
 
 		// Make vote on poll
@@ -37,7 +58,7 @@ PollApp
 
 			$http.put('/polls/vote', vote)
 				.success( function(data){
-					console.log($scope.poll);
+					// Let user know
 				})
 				.error( function(err){
 					console.log(err);

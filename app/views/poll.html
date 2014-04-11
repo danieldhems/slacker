@@ -9,4 +9,11 @@
 			<button ng-click="vote($index)">Vote</button>
 		</li>
 	</ul>
+
+	<h1>Archive</h1>
+	<ul>
+		<li ng-repeat="poll in archive">
+			<a ng-href="/#/poll/{{poll._id}}">{{poll.question}}</a>
+		</li>
+	</ul>
 </div>
