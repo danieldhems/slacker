@@ -64,6 +64,7 @@ PollApp
 			$http.put('/polls/vote', vote)
 				.success( function(data){
 					// Let user know
+					$scope.voted = true;
 				})
 				.error( function(err){
 					console.log(err);
