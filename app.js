@@ -29,19 +29,26 @@ require('./routes')(app);
 
 
 
-app.get('/polls', function(req, res){
-	Poll.findOne()
+app.get('/polls/:pollName', function(req, res){
+
+	var name = req.params.pollName;
+
+	console.log("fetching: "+name);
+
+	Poll.findOne({question: name})
 		.sort({"created": -1})
-		.limit(1)
 		.exec( function(err, data){
 			if(err) console.log(new Error(err));
 
-			console.log("\nDocuments found: "+data);
+			console.log("\nDocuments fetched: "+data);
 			res.send(data);
 		})
 })
 
 app.post('/polls/new', function(req, res){
+
+	console.log("\nCreating document: "+req.body.question);
+
 	Poll.create(req.body, function(err){
 		if(err) console.log(new Error(err));
 		res.send("Done");
@@ -49,17 +56,17 @@ app.post('/polls/new', function(req, res){
 })
 
 app.put('/polls/vote', function(req, res){
-	console.log(req.body);
 
-	var pollID = req.body.poll,
-			choiceText = req.body.choice;
+	var pollID = req.body.pollID,
+			choiceID = req.body.choiceID;
 
-	Poll.findOneAndUpdate({ poll: pollID, 'choices.text': choiceText}, { $inc: { 'choices.$.votes': 1 } }, function(err, data){
+	Poll.findOneAndUpdate({"_id": pollID, "choices._id": choiceID}, { $inc: { 'choices.$.votes': 1 } }, function(err, data){
+		
 		if(err) console.log(new Error(err));
-		console.log(data);
+		
+		console.log("\nDocument updated: "+data);
 		res.send("Done");
 	})
-//*/
 })
 
 module.exports = app;
