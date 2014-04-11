@@ -8,7 +8,8 @@ PollApp
   	$scope.poll = {
   		question:"",
   		choices: [],
-  		created: new Date()
+  		created: new Date(),
+          expires: new Date().setDate(new Date().getDate()+7)
   	};
 
   	// Placeholder for adding choices

@@ -5,13 +5,13 @@ var PollApp = angular.module('PollApp');
 PollApp
 	.filter('dashString', function(){
 		return function(string){
-			return string.toLowerCase().replace(/\s/g,"-").replace(/\?/g, "");
+			//return string.toLowerCase().replace(/\s/g,"-").replace(/\?/g, "");
 		}
 	})
 	.controller('PollCtrl', function ($scope, $http, $routeParams) {
 
 		// Poll currently in play, populated after successful fetch from DB
-		$scope.poll;
+		$scope.poll = {};
 		// Historic polls that can be viewed for results, but no longer acted upon
 		$scope.archive=[];
 		// Flag wheher user has voted yet
@@ -20,7 +20,7 @@ PollApp
 		// Check if user can vote
 		$scope.canVote = function(){
 			if($scope.poll === undefined) return;
-			return !$scope.hasVoted && new Date().toISOString() > $scope.poll.expires;
+			return !$scope.hasVoted && new Date().toISOString() < $scope.poll.expires;
 		}
 
 		/***
@@ -48,16 +48,28 @@ PollApp
 
   	$scope.fetchPolls = function(){
 
-			$http.get('/polls/')
-				.success( function(polls){
-					$scope.archive = polls;
+  		var pollID = $routeParams.pollID || "";
+
+			$http.get('/polls/' + pollID)
+				.success( function(data){
+					if(data.length>1){
+
+						$scope.poll = data.shift();
+
+						data.map( function(poll){
+							 $scope.archive.push(poll);
+						})
+					} else {
+						$scope.poll = data;
+					}
+
+					$scope.canVote();
 				})
 				.error( function(err){
 					console.log(err);
 				})
 		}
 
-		$scope.fetchPoll();
 		$scope.fetchPolls();
 
 		// Make vote on poll

@@ -38,9 +38,9 @@ app.get('/polls', function(req, res){
 	})
 })
 
-app.get('/poll/:pollID', function(req, res){
+app.get('/polls/:pollID', function(req, res){
 
-	var pollID = new ObjectId(req.params.pollID);
+	var pollID = req.params.pollID !== undefined ? new ObjectId(req.params.pollID) : "";
 
 	Poll.findOne({"_id": pollID})
 		.sort({"created": -1})
