@@ -2,8 +2,8 @@
 (function(){
 
 
-    var PollApp = angular.module('PollApp', []);
-    PollApp.config(function ($routeProvider) {
+    var PollApp = angular.module('PollApp', ['ngRoute']);
+    PollApp.config(['$routeProvider', function ($routeProvider) {
         $routeProvider
             // Would want to pass name or ID here, either for title or viewing old polls
             .when('/polls/:pollID/:pollQuestion', {
@@ -21,6 +21,6 @@
             .otherwise({
                 redirectTo: '/'
             });
-    });
+    }]);
 
 }.call(this));

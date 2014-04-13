@@ -12,10 +12,10 @@
 	<p>Add choice:</p>
 	<ul>
 		<li>
-			<input type="text" ng-model="newChoice" placeholder="New choice...">
-			<button ng-click="addChoice(newChoice)">add</button>
+			<input type="text" ng-model="newChoice" ng-keyup="alert($event.keyCode)" placeholder="New choice...">
+			<!--<button ng-click="addChoice(newChoice)">add</button>-->
 		</li>
 	</ul>
-
+{{key}}
 	<button ng-click="savePoll()">Finish</button>
 </div>

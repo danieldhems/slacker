@@ -16,6 +16,8 @@ PollApp
   	$scope.newChoice="";
   	$scope.numChoices=0;
 
+    $scope.key;
+
   	// Add choice to list
   	$scope.addChoice = function(){
   		$scope.poll.choices.push({ text: $scope.newChoice, votes: 0});
