@@ -8,6 +8,10 @@ body {
     color: #333;
 }
 
+p {
+    margin-bottom:0;
+}
+
 .hero-unit {
     margin: 50px 10% 0 10%;
     font-size: 18px;
@@ -26,7 +30,7 @@ body {
 
 ul {
     list-style:none;
-    margin:0;
+    margin:0 0 1em;
     padding:0;
 }
 
@@ -36,9 +40,13 @@ ul {
     margin-right:.5em;
 }
 
+.poll-choices {
+    margin:0 0 1em;
+}
+
 input[type=text] {
-    width: 100%;
+    width: 50%;
     line-height:2em;
-    font-size: 1.5em;
+    font-size: 1em;
     padding: 0 .5em;
 }

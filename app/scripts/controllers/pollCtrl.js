@@ -5,7 +5,7 @@ var PollApp = angular.module('PollApp');
 PollApp
 	.filter('dashString', function(){
 		return function(string){
-			//return string.toLowerCase().replace(/\s/g,"-").replace(/\?/g, "");
+			return string.toLowerCase().replace(/\s/g,"-").replace(/\?/g, "");
 		}
 	})
 	.controller('PollCtrl', function ($scope, $http, $routeParams) {

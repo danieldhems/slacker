@@ -16,13 +16,16 @@ PollApp
   	$scope.newChoice="";
   	$scope.numChoices=0;
 
-    $scope.key;
+    $scope.pollSubmitted = false;
 
   	// Add choice to list
-  	$scope.addChoice = function(){
-  		$scope.poll.choices.push({ text: $scope.newChoice, votes: 0});
-  		$scope.newChoice="";
-  		$scope.numChoices++;
+  	$scope.addChoice = function($event){
+      // Fire when user pressed 'return' key
+      if($event.keyCode == 13){
+        $scope.poll.choices.push({ text: $scope.newChoice, votes: 0});
+        $scope.newChoice="";
+        $scope.numChoices++;
+      }
   	}
   	// Remove choice from list
   	$scope.removeChoice = function(i){
@@ -34,7 +37,7 @@ PollApp
 
   		$http.post('/polls/new', $scope.poll)
 	  		.success( function(data){
-          console.log(data)
+          $scope.pollSubmitted = true;
 	  		})
 	  		.error( function(err){
 

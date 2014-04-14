@@ -1,21 +1,33 @@
 <div class="hero-unit">
 	<h1>Create a new poll</h1>
 
-	<input type="text" ng-model="poll.question" placeholder="Question...">
-	<ul>
-		<li ng-repeat="choice in poll.choices">
-			{{choice.text}}
-			<button ng-click="removeChoice($index)">Remove</button>
-		</li>
-	</ul>
+	<section class="new-poll-form" ng-show="!pollSubmitted">
+		<div>
+			<p>Enter the subject of your poll here</p>
+			<input class="input-question" type="text" ng-model="poll.question" placeholder="Question...">
+		</div>
+		
+		<p>Add choices here (press <strong>enter</strong> to add)</p>
+		<ul>
+			<li>
+				<input type="text" ng-model="newChoice" ng-keyup="addChoice($event)" placeholder="Choice...">
+			</li>
+		</ul>
 
-	<p>Add choice:</p>
-	<ul>
-		<li>
-			<input type="text" ng-model="newChoice" ng-keyup="alert($event.keyCode)" placeholder="New choice...">
-			<!--<button ng-click="addChoice(newChoice)">add</button>-->
-		</li>
-	</ul>
-{{key}}
-	<button ng-click="savePoll()">Finish</button>
+		<p>Choices</p>
+		<div class="poll-choices" ng-show="poll.choices.length>0">
+			<ul>
+				<li ng-repeat="choice in poll.choices">
+					{{choice.text}}
+					<button ng-click="removeChoice($index)">Remove</button>
+				</li>
+			</ul>
+		</div>
+		
+		<button ng-click="savePoll()">Finish</button>
+	</section>
+
+	<section class="submit-successful" ng-show="pollSubmitted">
+		<p>Thank you.</p>
+	</section>
 </div>
