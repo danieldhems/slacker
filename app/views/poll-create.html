@@ -1,42 +1,50 @@
 <div class="hero-unit">
 
-	<p>
-		<a href="/#/polls/">Back to latest poll</a>
-	</p>
+	<div class="menu">
+		<p>
+			<a href="/#/polls/">Back to latest poll</a>
+		</p>
+	</div>
 
-	<h1>Create a new poll</h1>
+	<div class="poll-header">
+		<h1>Create a new poll</h1>
+	</div>
 
 	<section class="new-poll-form" ng-show="!pollSubmitted">
-		<div class="poll-question">
+		<div class="poll-question field-group">
 			<p>Enter the subject of your poll here</p>
-			<input class="input-question" type="text" ng-model="poll.question" placeholder="Question...">
+			<input class="input-question" type="text" ng-model="poll.question" tabindex="1" placeholder="Question...">
 		</div>
 		
-		<p>Type choices here (press <strong>enter</strong> to add, then add more)</p>
-		<ul>
-			<li>
-				<input type="text" ng-model="newChoice" ng-keyup="addChoice($event)" placeholder="Choice...">
-			</li>
-		</ul>
-
-		<p>Choices</p>
-		<div class="poll-choices" ng-show="poll.choices.length>0">
+		<div class="field-group">
+			<p>Type choices here (press <strong>enter</strong> to add, then add more)</p>
 			<ul>
-				<li ng-repeat="choice in poll.choices">
-					{{choice.text}}
-					<button ng-click="removeChoice($index)">Remove</button>
+				<li>
+					<input type="text" ng-model="newChoice" ng-keyup="addChoice($event)" tabindex="1" placeholder="Choice...">
 				</li>
 			</ul>
 		</div>
 
+		<div class="field-group">
+			<p>Choices:</p>
+			<div class="poll-choices" ng-show="poll.choices.length>0">
+				<ul>
+					<li ng-repeat="choice in poll.choices">
+						{{choice.text}}
+						<button ng-click="removeChoice($index)">Remove</button>
+					</li>
+				</ul>
+			</div>
+		</div>
+
 		<p>How long should the poll run for? (default is 1 hour)</p>
-		<select ng-model="duration">
+		<select ng-model="duration" tabindex="1">
 			<option value="hour">1 hour</option>
 			<option value="day">1 day</option>
 			<option value="week">1 week</option>
 		</select>
 
-		<button class="form-finish" ng-click="savePoll()">Finish</button>
+		<button class="form-finish" ng-click="savePoll()" tabindex="1">Finish</button>
 	</section>
 
 	<section class="submit-successful" ng-show="pollSubmitted">

@@ -1,27 +1,23 @@
 <div class="hero-unit group">
-	<a href="/#/polls">Back to latest poll</a><br>
-	<a href="/#/polls/new">New poll</a>
+	<div class="menu">
+		<a href="/#/polls">Back to latest poll</a>
+		<a href="/#/polls/new">New poll</a>
+	</div>
 
 	<div class="poll-view">
-		<h1>Poll</h1>
-
-		<h2>{{poll.question}}</h2>
-		<div class="poll place-vote" ng-show="canVote()">
-			{{timeRemaining()}} left to vote
-			<ul>
-				<li ng-repeat="choice in poll.choices">
-					<span>{{choice.text}}</span>
-					<!-- Show vote button if user hasn't voted -->
-					<button ng-click="vote($index)">Vote</button>
-				</li>
-			</ul>
+		<div class="poll-header">
+			<h1>Poll: {{poll.question}}</h1>
+			<span class="poll-info">{{timeRemaining()}} left to vote</span>
 		</div>
 
-		<div class="poll-results" ng-show="!canVote()">
-			<div class="poll-info">
-				{{!hasClosed() ? 'poll closes in '+timeRemaining():'';}}
-			</div>
-			<ul>
+		<div class="poll-choices place-vote">
+			<ul ng-show="canVote()">
+				<li class="poll-choice" ng-repeat="choice in poll.choices">
+					<button class="btn" ng-click="vote($index)">Vote</button>
+					<span>{{choice.text}}</span>
+				</li>
+			</ul>
+			<ul ng-show="!canVote()">
 				<li ng-repeat="choice in poll.choices">
 					<span>{{choice.text}}</span>
 					<!-- Show result count after user has voted -->

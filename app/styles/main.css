@@ -12,8 +12,14 @@ p {
     margin-bottom:0;
 }
 
+.menu {
+    margin-bottom:4em;
+}
+.menu a {
+    display:block;
+}
+
 .hero-unit {
-    margin: 50px 10% 0 10%;
     font-size: 18px;
     font-weight: 200;
     line-height: 30px;
@@ -22,14 +28,18 @@ p {
     padding: 60px;
 }
 
-.hero-unit h1 {
+h1 {
     font-size: 60px;
     line-height: 1;
     letter-spacing: -1px;
 }
 
 .poll-view {
-    float:left;
+    margin-bottom:4em;
+}
+
+.poll-header {
+    margin-bottom:2em;
 }
 
 ul {
@@ -45,7 +55,15 @@ ul {
 }
 
 .poll-choices {
-    margin:0 0 1em;
+    margin:1em 0 1em;
+}
+.poll-choice {
+    margin-bottom:1em;
+    font-size:1.2em;
+}
+.poll-choices button {
+    float:left;
+    margin-right:1em;
 }
 
 input[type=text] {
@@ -55,14 +73,13 @@ input[type=text] {
     padding: 0 .5em;
 }
 
+.field-group {
+    margin-bottom:1em;
+}
+
 .form-finish {
     display:block;
     margin-top:1em;
-}
-
-.poll-archive {
-    width:30%;
-    float:right;
 }
 
 .group:after {

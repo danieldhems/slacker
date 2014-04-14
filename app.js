@@ -52,7 +52,7 @@ app.get('/polls/:pollID', function(req, res){
 })
 
 app.post('/polls/new', function(req, res){
-
+	console.log(req.body);
 	Poll.create(req.body, function(err){
 		if(err) console.log(new Error(err));
 		res.send("Done");
