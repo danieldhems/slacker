@@ -37,7 +37,7 @@ PollApp
   	*	Fetch poll by ID
   	*
   	***/
-
+  	/*/
   	$scope.fetchPoll = function(){
 
 			$http.get('/poll/'+ $routeParams.pollID)
