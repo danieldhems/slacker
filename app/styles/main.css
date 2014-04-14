@@ -58,11 +58,11 @@ ul {
     margin:1em 0 1em;
 }
 .poll-choice {
-    margin-bottom:1em;
+    margin-bottom:.8em;
     font-size:1.2em;
 }
 .poll-choices button {
-    float:left;
+
     margin-right:1em;
 }
 

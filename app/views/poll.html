@@ -18,7 +18,7 @@
 				</li>
 			</ul>
 			<ul ng-show="!canVote()">
-				<li ng-repeat="choice in poll.choices">
+				<li class="poll-choice" ng-repeat="choice in poll.choices">
 					<span>{{choice.text}}</span>
 					<!-- Show result count after user has voted -->
 					<div class="count-bar">

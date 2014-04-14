@@ -29,9 +29,9 @@
 			<p>Choices:</p>
 			<div class="poll-choices" ng-show="poll.choices.length>0">
 				<ul>
-					<li ng-repeat="choice in poll.choices">
+					<li class="poll-choice" ng-repeat="choice in poll.choices">
+						<button class="btn" ng-click="removeChoice($index)">Remove</button>
 						{{choice.text}}
-						<button ng-click="removeChoice($index)">Remove</button>
 					</li>
 				</ul>
 			</div>

@@ -61,18 +61,28 @@ PollApp
 
 			$http.get('/polls/' + pollID)
 				.success( function(data){
-					if(data.length>1){
 
+					// Requests with a pollID param return a single object,
+					// whereas those without return a nested object
+					// so we have to check for lengths that are both undefined and 1
+					// if only 1 poll exists
+
+					if(data.length===undefined){
+
+						$scope.poll = data;
+					} else if (data.length==1){
+
+						$scope.poll = data[0];
+					} else {
+
+						// Populate poll with latest entry (assuming results array has latest poll as first item!)
 						$scope.poll = data.shift();
 
+						// put the rest in the archive array
 						data.map( function(poll){
 							 $scope.archive.push(poll);
-						})
-					} else {
-						$scope.poll = data;
+						});
 					}
-
-					$scope.canVote();
 				})
 				.error( function(err){
 					console.log(err);

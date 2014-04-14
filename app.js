@@ -61,6 +61,8 @@ app.post('/polls/new', function(req, res){
 
 app.put('/polls/vote', function(req, res){
 
+	console.log(req.ip);
+
 	var pollID = req.body.pollID,
 			choiceID = req.body.choiceID;
 
