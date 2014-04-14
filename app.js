@@ -7,9 +7,16 @@ var express = require('express'),
 
 mongoose.connect('mongodb://localhost:27017/slacker');
 
+var VotersSchema = new Schema({
+			name: String,
+			ip: String,
+			voted_for: Number	
+})
+
 var ChoicesSchema = new Schema({
 			text: String,
-			votes: Number
+			votes: Number,
+			voters: [VotersSchema]
 		});
 
 var	PollSchema = new Schema({
@@ -27,6 +34,17 @@ app.directory = __dirname;
 require('./config/environments')(app);
 require('./routes')(app);
 
+/*var knownVoters = 
+	{
+		"name": "dan",
+		"ip": "192.168.32.24"
+	},
+	{
+		"name":"martin",
+		"ip":"192.168.32.227"
+	}
+};
+*/
 app.get('/polls', function(req, res){
 
 	Poll.find()
@@ -61,12 +79,29 @@ app.post('/polls/new', function(req, res){
 
 app.put('/polls/vote', function(req, res){
 
-	console.log(req.ip);
-
 	var pollID = req.body.pollID,
-			choiceID = req.body.choiceID;
+			choiceID = req.body.choiceID,
+			IP = req.ip;
 
-	Poll.findOneAndUpdate({"_id": pollID, "choices._id": choiceID}, { $inc: { 'choices.$.votes': 1 } }, function(err, data){
+	// Check if IP has already been pushed to poll's voter list
+	/*/
+	Poll.findOne({"_id": pollID, "choices.voters.ip": { $in: [IP] } },
+		function(err, data){
+			if(err) console.log(new Error(err));
+			console.log(data);
+		}
+	);
+	//*/
+
+	// need a map of IPs to names, then can populate queries properly 
+
+	var voter = {
+		"name": "dan",
+		"ip": IP,
+		"voted_for": choiceID
+	};
+
+	Poll.findOneAndUpdate({"_id": pollID, "choices._id": choiceID}, { $inc: { 'choices.$.votes': 1 }, $push: { 'choices.$.voters': voter }}, function(err, data){
 		
 		if(err) console.log(new Error(err));
 		
