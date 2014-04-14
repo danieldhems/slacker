@@ -1,33 +1,39 @@
-<div class="hero-unit">
-<a href="/#/polls">Back to latest poll</a><br>
-<a href="/#/polls/new">New poll</a>
+<div class="hero-unit group">
+	<a href="/#/polls">Back to latest poll</a><br>
+	<a href="/#/polls/new">New poll</a>
 
-	<h1>Poll</h1>
+	<div class="poll-view">
+		<h1>Poll</h1>
 
-	<h2>{{poll.question}}</h2>
-	<div class="vote-place" ng-show="canVote()">
-		<ul>
-			<li ng-repeat="choice in poll.choices">
-				<span>{{choice.text}}</span>
-				<!-- Show vote button if user hasn't voted -->
-				<button ng-click="vote($index)">Vote</button>
-			</li>
-		</ul>
+		<h2>{{poll.question}}</h2>
+		<div class="poll place-vote" ng-show="canVote()">
+			{{timeRemaining()}} left to vote
+			<ul>
+				<li ng-repeat="choice in poll.choices">
+					<span>{{choice.text}}</span>
+					<!-- Show vote button if user hasn't voted -->
+					<button ng-click="vote($index)">Vote</button>
+				</li>
+			</ul>
+		</div>
+
+		<div class="poll-results" ng-show="!canVote()">
+			<div class="poll-info">
+				{{!hasClosed() ? 'poll closes in '+timeRemaining():'';}}
+			</div>
+			<ul>
+				<li ng-repeat="choice in poll.choices">
+					<span>{{choice.text}}</span>
+					<!-- Show result count after user has voted -->
+					<div class="count-bar">
+						<span style="width:{{choice.votes*20}}px">&nbsp;</span>{{choice.votes==0?'no votes':choice.votes;}}
+					</div>
+				</li>
+			</ul>
+		</div>
 	</div>
 
-	<div class="vote-results" ng-show="!canVote()">
-		<ul>
-			<li ng-repeat="choice in poll.choices">
-				<span>{{choice.text}}</span>
-				<!-- Show result count after user has voted -->
-				<div class="count-bar">
-					<span style="width:{{choice.votes*20}}px">&nbsp;</span>{{choice.votes}}
-				</div>
-			</li>
-		</ul>
-	</div>
-
-	<div ng-show="archive.length>0">
+	<div class="poll-archive" ng-show="archive.length>0">
 		<h1>Archive</h1>
 		<ul>
 			<li ng-repeat="poll in archive">

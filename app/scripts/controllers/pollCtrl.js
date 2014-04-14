@@ -17,10 +17,19 @@ PollApp
 		// Flag wheher user has voted yet
 		$scope.hasVoted = false;
 
+		$scope.hasClosed = function(){
+			return $scope.poll.expires <= moment().toISOString();
+		}
+
 		// Check if user can vote
 		$scope.canVote = function(){
 			if($scope.poll === undefined) return;
-			return !$scope.hasVoted && new Date().toISOString() < $scope.poll.expires;
+			// verify that user hasn't yet vgoted, and that poll has not yet finished
+			return !$scope.hasVoted && !$scope.hasClosed();
+		}
+
+		$scope.timeRemaining = function(){
+			return moment($scope.poll.expires).fromNow(true);
 		}
 
 		/***

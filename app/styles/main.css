@@ -28,6 +28,10 @@ p {
     letter-spacing: -1px;
 }
 
+.poll-view {
+    float:left;
+}
+
 ul {
     list-style:none;
     margin:0 0 1em;
@@ -54,4 +58,15 @@ input[type=text] {
 .form-finish {
     display:block;
     margin-top:1em;
+}
+
+.poll-archive {
+    width:30%;
+    float:right;
+}
+
+.group:after {
+    content:"";
+    display:table;
+    clear:both;
 }
