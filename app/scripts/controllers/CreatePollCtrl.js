@@ -8,8 +8,8 @@ PollApp
   	$scope.poll = {
   		question:"",
   		choices: [],
-  		created: new Date(),
-          expires: new Date().setDate(new Date().getDate()+7)
+  		created: moment(),
+      expires: null
   	};
 
   	// Placeholder for adding choices
@@ -32,15 +32,44 @@ PollApp
   		$scope.poll.choices.splice(i,1);
   	}
 
+    var hourFromNow = moment().add('hours', 1),
+        dayFromNow = moment().add('days', 1),
+        weekFromNow = moment().add('weeks', 1);
+
+    $scope.setDuration = function(duration){
+      switch(duration){
+
+        case "hour":
+        $scope.poll.expires = hourFromNow;
+        break;
+
+        case "day":
+        $scope.poll.expires = dayFromNow;
+        break;
+
+        case "week":
+        $scope.poll.expires = weekFromNow;
+        break;
+
+        default:
+        $scope.poll.expires = hourFromNow;
+        break;
+      }
+    }
+
   	// Save poll to DB
   	$scope.savePoll = function(){
 
-  		$http.post('/polls/new', $scope.poll)
-	  		.success( function(data){
+      // Better UX to set expiration on form submit instead of page load,
+      // in case user spends long time on page before submission? 
+      $scope.setDuration($scope.duration);
+
+      $http.post('/polls/new', $scope.poll)
+        .success( function(poll){
           $scope.pollSubmitted = true;
 	  		})
 	  		.error( function(err){
-
+          console.log(new Error(err));
 	  		});
   	}
   });

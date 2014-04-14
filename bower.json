@@ -1,18 +1,18 @@
 {
-    "name": "sites",
-    "version": "0.0.0",
-    "dependencies": {
-        "jquery": "~2.0.3",
-        "angular": "*",
-        "angular-resource": "*",
-        "angular-cookies": "*",
-        "angular-sanitize": "*",
-        
-        "json3": "~3.2.4",
-        "es5-shim": "~2.0.8"
-    },
-    "devDependencies": {
-        "angular-mocks": "*",
-        "angular-scenario": "*"
-    }
+  "name": "sites",
+  "version": "0.0.0",
+  "dependencies": {
+    "jquery": "~2.0.3",
+    "angular": "*",
+    "angular-resource": "*",
+    "angular-cookies": "*",
+    "angular-sanitize": "*",
+    "json3": "~3.2.4",
+    "es5-shim": "~2.0.8",
+    "momentjs": "~2.6.0"
+  },
+  "devDependencies": {
+    "angular-mocks": "*",
+    "angular-scenario": "*"
+  }
 }

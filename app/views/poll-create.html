@@ -1,13 +1,18 @@
 <div class="hero-unit">
+
+	<p>
+		<a href="/#/polls/">Back to latest poll</a>
+	</p>
+
 	<h1>Create a new poll</h1>
 
 	<section class="new-poll-form" ng-show="!pollSubmitted">
-		<div>
+		<div class="poll-question">
 			<p>Enter the subject of your poll here</p>
 			<input class="input-question" type="text" ng-model="poll.question" placeholder="Question...">
 		</div>
 		
-		<p>Add choices here (press <strong>enter</strong> to add)</p>
+		<p>Type choices here (press <strong>enter</strong> to add, then add more)</p>
 		<ul>
 			<li>
 				<input type="text" ng-model="newChoice" ng-keyup="addChoice($event)" placeholder="Choice...">
@@ -23,11 +28,21 @@
 				</li>
 			</ul>
 		</div>
-		
-		<button ng-click="savePoll()">Finish</button>
+
+		<p>How long should the poll run for? (default is 1 hour)</p>
+		<select ng-model="duration">
+			<option value="hour">1 hour</option>
+			<option value="day">1 day</option>
+			<option value="week">1 week</option>
+		</select>
+
+		<button class="form-finish" ng-click="savePoll()">Finish</button>
 	</section>
 
 	<section class="submit-successful" ng-show="pollSubmitted">
 		<p>Thank you.</p>
+		<p>
+			<a href="/#/polls/">Back to latest poll</a>
+		</p>
 	</section>
 </div>
