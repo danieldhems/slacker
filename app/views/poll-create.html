@@ -12,12 +12,12 @@
 
 	<section class="new-poll-form" ng-show="!pollSubmitted">
 		<div class="poll-question field-group">
-			<p>Enter the subject of your poll here</p>
+			<p>Poll subject / question</p>
 			<input class="input-question" type="text" ng-model="poll.question" tabindex="1" placeholder="Question...">
 		</div>
 		
 		<div class="field-group">
-			<p>Type choices here (press <strong>enter</strong> to add, then add more)</p>
+			<p>Add choices (press <strong>enter</strong> to add - textbox will clear itself)</p>
 			<ul>
 				<li>
 					<input type="text" ng-model="newChoice" ng-keyup="addChoice($event)" tabindex="1" placeholder="Choice...">

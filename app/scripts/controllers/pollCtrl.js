@@ -29,7 +29,7 @@ PollApp
 		}
 
 		$scope.timeRemaining = function(){
-			return moment($scope.poll.expires).fromNow(true);
+			return moment($scope.poll.expires).calendar();
 		}
 
 		/***
@@ -110,4 +110,5 @@ PollApp
 					console.log(err);
 				})
 		}
+
 	});
