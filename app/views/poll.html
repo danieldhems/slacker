@@ -7,7 +7,7 @@
 	<div class="poll-view">
 		<div class="poll-header">
 			<h1>Poll: {{poll.question}}</h1>
-			<span class="poll-info">{{timeRemaining()}} left to vote</span>
+			<span class="poll-info" ng-show="!hasClosed()">Poll closes: {{timeRemaining()}}</span>
 		</div>
 
 		<div class="poll-choices place-vote">
