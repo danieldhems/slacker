@@ -45,9 +45,6 @@ require('./routes')(app);
 	}
 };
 */
-
-module.exports = app;
-
 app.get('/polls', routes.polls);
 
 app.get('/polls/:pollID', routes.poll);
@@ -55,3 +52,6 @@ app.get('/polls/:pollID', routes.poll);
 app.post('/polls/new', routes.create);
 
 app.put('/polls/vote', routes.vote)
+
+module.exports = app;
+
