@@ -28,6 +28,10 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-express');
 
   grunt.initConfig({
+    server: {
+      port: 3000,
+      base: './#/polls'
+    },
     yeoman: yeomanConfig,
     watch: {
       coffee: {

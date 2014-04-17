@@ -33,23 +33,6 @@ PollApp
 		}
 
 		/***
-  	*
-  	*	Fetch poll by ID
-  	*
-  	***/
-  	/*/
-  	$scope.fetchPoll = function(){
-
-			$http.get('/poll/'+ $routeParams.pollID)
-				.success( function(poll){
-					$scope.poll = poll;
-				})
-				.error( function(err){
-					console.log(err);
-				})
-		}
-
-		/***
 		*
 		*	Fetch all polls
 		*

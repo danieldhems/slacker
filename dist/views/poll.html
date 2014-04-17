@@ -1,0 +1,40 @@
+<div class="hero-unit group">
+	<div class="menu">
+		<a href="/#/polls">Back to latest poll</a>
+		<a href="/#/polls/new">New poll</a>
+	</div>
+
+	<div class="poll-view">
+		<div class="poll-header">
+			<h1>Poll: {{poll.question}}</h1>
+			<span class="poll-info" ng-show="!hasClosed()">Poll closes: {{timeRemaining()}}</span>
+		</div>
+
+		<div class="poll-choices place-vote">
+			<ul ng-show="canVote()">
+				<li class="poll-choice" ng-repeat="choice in poll.choices">
+					<button class="btn" ng-click="vote($index)">Vote</button>
+					<span>{{choice.text}}</span>
+				</li>
+			</ul>
+			<ul ng-show="!canVote()">
+				<li class="poll-choice" ng-repeat="choice in poll.choices">
+					<span>{{choice.text}}</span>
+					<!-- Show result count after user has voted -->
+					<div class="count-bar">
+						<span style="width:{{choice.votes*20}}px">&nbsp;</span>{{choice.votes==0?'no votes':choice.votes;}}
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="poll-archive" ng-show="archive.length>0">
+		<h1>Archive</h1>
+		<ul>
+			<li ng-repeat="poll in archive">
+				<a ng-href="/#/polls/{{poll._id}}/{{poll.question|dashString}}">{{poll.question}}</a>
+			</li>
+		</ul>
+	</div>
+</div>
