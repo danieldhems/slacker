@@ -34,17 +34,6 @@ app.directory = __dirname;
 require('./config/environments')(app);
 require('./routes')(app);
 
-/*var knownVoters = 
-	{
-		"name": "dan",
-		"ip": "192.168.32.24"
-	},
-	{
-		"name":"martin",
-		"ip":"192.168.32.227"
-	}
-};
-*/
 app.get('/polls', routes.polls);
 
 app.get('/polls/:pollID', routes.poll);

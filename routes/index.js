@@ -15,7 +15,7 @@ module.exports = function (app) {
 
 		this.poll = function(req, res){
 
-			var pollID = req.params.pollID !== undefined ? new ObjectId(req.params.pollID) : "";
+			var pollID = new ObjectId(req.params.pollID);
 
 			Poll.findOne({"_id": pollID})
 				.sort({"created": -1})
