@@ -11,7 +11,7 @@ PollApp
   		created: moment(),
       expires: null
   	};
-
+console.log($scope.poll)
   	// Placeholder for adding choices
   	$scope.newChoice="";
   	$scope.numChoices=0;
@@ -59,7 +59,7 @@ PollApp
 
   	// Save poll to DB
   	$scope.savePoll = function(){
-
+console.log($scope.poll);
       // Better UX to set expiration on form submit instead of page load,
       // in case user spends long time on page before submission? 
       $scope.setDuration($scope.duration);
